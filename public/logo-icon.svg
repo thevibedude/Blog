@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="thevibedude icon">
+<defs>
+  <clipPath id="hexClipIcon">
+    <polygon points="32,4 56.25,17 56.25,47 32,60 7.75,47 7.75,17" />
+  </clipPath>
+  <style>
+    /* === BOOT CLASS === */
+    .boot #icon-outer-ring {
+      stroke-dasharray: 210;
+      stroke-dashoffset: 210;
+      animation: iconDrawRing 1s cubic-bezier(0.4,0,0.2,1) 0.1s forwards;
+    }
+    .boot #icon-inner-ring {
+      stroke-dasharray: 198;
+      stroke-dashoffset: 198;
+      animation: iconDrawRing 1s cubic-bezier(0.4,0,0.2,1) 0.3s forwards;
+    }
+    .boot #icon-binary {
+      opacity: 0;
+      animation: iconFadeBinary 0.6s ease-out 0.8s forwards;
+    }
+    .boot #icon-main-slash {
+      stroke-dasharray: 76;
+      stroke-dashoffset: 76;
+      animation: iconDrawSlash 0.5s cubic-bezier(0.4,0,0.2,1) 1.0s forwards;
+    }
+    .boot #icon-glitch-slash {
+      stroke-dasharray: 76;
+      stroke-dashoffset: 76;
+      animation: iconDrawSlash 0.4s cubic-bezier(0.4,0,0.2,1) 1.3s forwards;
+    }
+    .boot #icon-frag1 { opacity: 0; animation: iconFadeIn 0.3s ease-out 1.5s forwards; }
+    .boot #icon-frag2 { opacity: 0; animation: iconFadeIn 0.3s ease-out 1.6s forwards; }
+
+    /* === PULSE CLASS === */
+    .pulse #icon-outer-ring {
+      animation: iconRingPulse 3s ease-in-out infinite;
+    }
+    .pulse #icon-glitch-slash {
+      animation: iconGlitchFlicker 4s ease-in-out infinite;
+    }
+    .pulse #icon-frag1 {
+      animation: iconFragFlicker 4s ease-in-out 0s infinite;
+    }
+    .pulse #icon-frag2 {
+      animation: iconFragFlicker 4s ease-in-out 0.3s infinite;
+    }
+    .pulse #icon-binary {
+      animation: iconBinaryScroll 8s linear infinite;
+    }
+
+    /* === HOVER CLASS === */
+    .hover #icon-outer-ring {
+      stroke: #F0997B;
+      stroke-width: 4;
+    }
+    .hover #icon-glitch-slash {
+      opacity: 0.8;
+      transform: translate(-3px, 3px);
+    }
+
+    /* Shared keyframes */
+    @keyframes iconDrawRing { to { stroke-dashoffset: 0; } }
+    @keyframes iconFadeBinary { to { opacity: 0.13; } }
+    @keyframes iconDrawSlash { to { stroke-dashoffset: 0; } }
+    @keyframes iconFadeIn { to { opacity: 1; } }
+    @keyframes iconRingPulse { 0%, 100% { stroke-opacity: 1; } 50% { stroke-opacity: 0.5; } }
+    @keyframes iconGlitchFlicker {
+      0%, 87% { transform: translate(0,0); opacity: 0.45; }
+      88% { transform: translate(-2px,1px); opacity: 0.8; }
+      90% { transform: translate(3px,-1px); opacity: 0.2; }
+      93% { transform: translate(-1px,2px); opacity: 0.6; }
+      96%, 100% { transform: translate(0,0); opacity: 0.45; }
+    }
+    @keyframes iconFragFlicker {
+      0%, 89% { opacity: 0.57; }
+      90% { opacity: 0; }
+      93% { opacity: 0.57; }
+      100% { opacity: 0.57; }
+    }
+    @keyframes iconBinaryScroll {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-20px); }
+    }
+  </style>
+</defs>
+
+<!-- Default: pulse state. Change class to "boot" or "hover" for other states -->
+<g class="pulse" transform="translate(32,32)">
+  <!-- Hex fill -->
+  <polygon
+    points="0,-28 24.25,-14 24.25,14 0,28 -24.25,14 -24.25,-14"
+    fill="#12080A"
+  />
+
+  <!-- Outer ring -->
+  <polygon
+    id="icon-outer-ring"
+    points="0,-28 24.25,-14 24.25,14 0,28 -24.25,14 -24.25,-14"
+    fill="none"
+    stroke="#D85A30"
+    stroke-width="2.5"
+    stroke-linejoin="round"
+  />
+
+  <!-- Inner echo ring -->
+  <polygon
+    id="icon-inner-ring"
+    points="0,-25 21.65,-12.5 21.65,12.5 0,25 -21.65,12.5 -21.65,-12.5"
+    fill="none"
+    stroke="#F0997B"
+    stroke-width="0.8"
+    stroke-linejoin="round"
+    opacity="0.4"
+  />
+
+  <!-- Binary texture -->
+  <g id="icon-binary" opacity="0.13" clip-path="url(#hexClipIcon)" transform="translate(-32,-32)">
+    <text font-family="monospace" font-size="6" fill="#F0997B" x="8" y="16">10110010</text>
+    <text font-family="monospace" font-size="6" fill="#F0997B" x="6" y="24">01001101</text>
+    <text font-family="monospace" font-size="6" fill="#F0997B" x="10" y="32">11010010</text>
+    <text font-family="monospace" font-size="6" fill="#F0997B" x="7" y="40">01101001</text>
+    <text font-family="monospace" font-size="6" fill="#F0997B" x="9" y="48">10110100</text>
+    <text font-family="monospace" font-size="6" fill="#F0997B" x="5" y="56">01011001</text>
+  </g>
+
+  <!-- Glitch slash -->
+  <line
+    id="icon-glitch-slash"
+    x1="-20" y1="20"
+    x2="22" y2="-20"
+    stroke="#F0997B"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    opacity="0.45"
+    transform="translate(4,4)"
+  />
+
+  <!-- Main slash -->
+  <line
+    id="icon-main-slash"
+    x1="-20" y1="20"
+    x2="22" y2="-20"
+    stroke="#E8693A"
+    stroke-width="5.5"
+    stroke-linecap="round"
+  />
+
+  <!-- Fragment 1 -->
+  <line
+    id="icon-frag1"
+    x1="-20" y1="13"
+    x2="-13" y2="20"
+    stroke="#F5C4B3"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    opacity="0.57"
+  />
+
+  <!-- Fragment 2 -->
+  <line
+    id="icon-frag2"
+    x1="13" y1="-17"
+    x2="20" y2="-12"
+    stroke="#D85A30"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    opacity="0.6"
+  />
+</g>
+</svg>

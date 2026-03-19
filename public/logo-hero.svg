@@ -1,0 +1,240 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 180" width="460" height="180" role="img" aria-label="thevibedude logo">
+<defs>
+  <clipPath id="hexClipHero">
+    <polygon points="130,0 225.17,52.5 225.17,157.5 130,210 34.83,157.5 34.83,52.5" transform="translate(0,-30)" />
+  </clipPath>
+  <style>
+    @media (prefers-reduced-motion: no-preference) {
+      /* Hex outer ring */
+      #hero-outer-ring {
+        stroke-dasharray: 720;
+        stroke-dashoffset: 720;
+        animation: drawRing 1s cubic-bezier(0.4,0,0.2,1) 0.1s forwards;
+      }
+      /* Inner echo ring */
+      #hero-inner-ring {
+        stroke-dasharray: 680;
+        stroke-dashoffset: 680;
+        animation: drawRing 1s cubic-bezier(0.4,0,0.2,1) 0.3s forwards;
+      }
+      /* Binary texture */
+      #hero-binary {
+        opacity: 0;
+        animation: fadeInBinary 0.6s ease-out 0.8s forwards;
+      }
+      /* Main slash */
+      #hero-main-slash {
+        stroke-dasharray: 260;
+        stroke-dashoffset: 260;
+        animation: drawSlash 0.5s cubic-bezier(0.4,0,0.2,1) 1.0s forwards;
+      }
+      /* Glitch slash */
+      #hero-glitch-slash {
+        stroke-dasharray: 260;
+        stroke-dashoffset: 260;
+        animation: drawSlash 0.4s cubic-bezier(0.4,0,0.2,1) 1.3s forwards;
+      }
+      /* Fragments */
+      #hero-frag1 {
+        opacity: 0;
+        animation: fadeIn 0.3s ease-out 1.5s forwards;
+      }
+      #hero-frag2 {
+        opacity: 0;
+        animation: fadeIn 0.3s ease-out 1.6s forwards;
+      }
+      /* Wordmark */
+      #hero-wordmark {
+        opacity: 0;
+        letter-spacing: 20px;
+        animation: wordmarkIn 0.7s cubic-bezier(0.4,0,0.2,1) 1.4s forwards;
+      }
+      /* Underlines */
+      #hero-underline-main {
+        transform: scaleX(0);
+        transform-origin: left;
+        animation: scaleIn 0.5s cubic-bezier(0.4,0,0.2,1) 2.1s forwards;
+      }
+      #hero-underline-short {
+        transform: scaleX(0);
+        transform-origin: left;
+        animation: scaleIn 0.4s cubic-bezier(0.4,0,0.2,1) 2.3s forwards;
+      }
+
+      @keyframes drawRing {
+        to { stroke-dashoffset: 0; }
+      }
+      @keyframes fadeInBinary {
+        to { opacity: 0.13; }
+      }
+      @keyframes drawSlash {
+        to { stroke-dashoffset: 0; }
+      }
+      @keyframes fadeIn {
+        to { opacity: 1; }
+      }
+      @keyframes wordmarkIn {
+        to { opacity: 1; letter-spacing: 6px; }
+      }
+      @keyframes scaleIn {
+        to { transform: scaleX(1); }
+      }
+    }
+
+    /* Hover state */
+    .logo-group { cursor: pointer; }
+    .logo-group:hover #hero-outer-ring {
+      stroke: #F0997B;
+      stroke-width: 8;
+      transition: stroke 0.3s, stroke-width 0.3s;
+    }
+    .logo-group:hover #hero-wordmark {
+      fill: #E8693A;
+      letter-spacing: 10px;
+      transition: fill 0.4s, letter-spacing 0.4s;
+    }
+    .logo-group:hover #hero-glitch-slash {
+      opacity: 0.8;
+      transform: translate(-3px, 3px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .logo-group:hover #hero-main-slash {
+      animation: slashPulse 0.4s ease-out;
+    }
+    @keyframes slashPulse {
+      0% { stroke-width: 13; }
+      50% { stroke-width: 16; }
+      100% { stroke-width: 13; }
+    }
+  </style>
+</defs>
+
+<g class="logo-group">
+  <!-- Hex icon centered at (130, 75) with radius ~75 -->
+  <!-- pointy-top hexagon: center (130,75), radius 75 -->
+  <g transform="translate(130, 75)">
+    <!-- Hex fill -->
+    <polygon
+      points="0,-75 64.95,-37.5 64.95,37.5 0,75 -64.95,37.5 -64.95,-37.5"
+      fill="#12080A"
+    />
+
+    <!-- Outer ring -->
+    <polygon
+      id="hero-outer-ring"
+      points="0,-75 64.95,-37.5 64.95,37.5 0,75 -64.95,37.5 -64.95,-37.5"
+      fill="none"
+      stroke="#D85A30"
+      stroke-width="5.5"
+      stroke-linejoin="round"
+    />
+
+    <!-- Inner echo ring (inset ~6px) -->
+    <polygon
+      id="hero-inner-ring"
+      points="0,-69 60,-34.5 60,34.5 0,69 -60,34.5 -60,-34.5"
+      fill="none"
+      stroke="#F0997B"
+      stroke-width="1.5"
+      stroke-linejoin="round"
+      opacity="0.4"
+    />
+
+    <!-- Binary texture clipped to hex -->
+    <g id="hero-binary" opacity="0.13" clip-path="url(#hexClipHero)" transform="translate(-130,-105)">
+      <text font-family="monospace" font-size="10" fill="#F0997B" x="50" y="30">10110010 01101001</text>
+      <text font-family="monospace" font-size="10" fill="#F0997B" x="45" y="44">01001101 10110100</text>
+      <text font-family="monospace" font-size="10" fill="#F0997B" x="55" y="58">11010010 01101100</text>
+      <text font-family="monospace" font-size="10" fill="#F0997B" x="40" y="72">10010110 01011010</text>
+      <text font-family="monospace" font-size="10" fill="#F0997B" x="50" y="86">01101001 10110010</text>
+      <text font-family="monospace" font-size="10" fill="#F0997B" x="45" y="100">11001010 01011001</text>
+      <text font-family="monospace" font-size="10" fill="#F0997B" x="55" y="114">10110100 11010010</text>
+      <text font-family="monospace" font-size="10" fill="#F0997B" x="48" y="128">01001011 10010110</text>
+      <text font-family="monospace" font-size="10" fill="#F0997B" x="52" y="142">10110010 01101001</text>
+      <text font-family="monospace" font-size="10" fill="#F0997B" x="43" y="156">01001101 10110100</text>
+    </g>
+
+    <!-- Glitch offset slash -->
+    <line
+      id="hero-glitch-slash"
+      x1="-51,57" y1="51"
+      x2="63" y2="-51"
+      x1="-51" y1="51"
+      stroke="#F0997B"
+      stroke-width="6"
+      stroke-linecap="round"
+      opacity="0.45"
+      transform="translate(12, 12)"
+    />
+
+    <!-- Main slash -->
+    <line
+      id="hero-main-slash"
+      x1="-51" y1="51"
+      x2="63" y2="-51"
+      stroke="#E8693A"
+      stroke-width="13"
+      stroke-linecap="round"
+    />
+
+    <!-- Fragment 1 (near entry bottom-left) -->
+    <line
+      id="hero-frag1"
+      x1="-52" y1="36"
+      x2="-35" y2="50"
+      stroke="#F5C4B3"
+      stroke-width="4.5"
+      stroke-linecap="round"
+      opacity="0.57"
+    />
+
+    <!-- Fragment 2 (near exit top-right) -->
+    <line
+      id="hero-frag2"
+      x1="35" y1="-45"
+      x2="55" y2="-32"
+      stroke="#D85A30"
+      stroke-width="4"
+      stroke-linecap="round"
+      opacity="0.6"
+    />
+  </g>
+
+  <!-- Wordmark group: starts at x=220 -->
+  <g transform="translate(220, 75)">
+    <!-- Wordmark text -->
+    <text
+      id="hero-wordmark"
+      font-family="system-ui, Arial, sans-serif"
+      font-weight="400"
+      font-size="26"
+      fill="#F0997B"
+      dominant-baseline="middle"
+      x="0"
+      y="-8"
+      letter-spacing="6"
+    >thevibedude</text>
+
+    <!-- Main underline -->
+    <rect
+      id="hero-underline-main"
+      x="0"
+      y="6"
+      width="222"
+      height="2.5"
+      fill="#E8693A"
+    />
+
+    <!-- Short echo underline -->
+    <rect
+      id="hero-underline-short"
+      x="0"
+      y="11"
+      width="89"
+      height="1"
+      fill="#F0997B"
+      opacity="0.5"
+    />
+  </g>
+</g>
+</svg>
