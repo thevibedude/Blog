@@ -2,7 +2,6 @@ import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 import { checkRateLimit } from '@/lib/rateLimit';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 const ALLOWED_ORIGIN = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://yourdomain.com';
 
 export async function POST(req: Request) {
@@ -84,6 +83,7 @@ export async function POST(req: Request) {
        return NextResponse.json({ success: true, message: 'Simulated success in development' });
     }
 
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const { data, error } = await resend.emails.send({
       from: 'Contact Form <onboarding@resend.dev>',
       to: [destinationEmail],
