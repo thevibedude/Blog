@@ -8,6 +8,25 @@ import { Project } from '@/lib/projects';
 import { ProgressBar } from './ProgressBar';
 import { cn } from '@/lib/utils';
 
+function isSafeIframeSrc(url: string | undefined): boolean {
+  if (!url) return false;
+  const ownDomains = [
+    'thevibedude.com',
+    'www.thevibedude.com',
+    'vercel.app',
+    'localhost',
+  ];
+  try {
+    const parsed = new URL(url);
+    const isSelf = ownDomains.some(
+      (d) => parsed.hostname === d || parsed.hostname.endsWith('.' + d)
+    );
+    return !isSelf;
+  } catch {
+    return false; // invalid URL — don't render iframe
+  }
+}
+
 export function ProjectCard({ project }: { project: Project }) {
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const [showLoomModal, setShowLoomModal] = useState(false);
@@ -30,7 +49,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
     switch (project.previewType) {
       case 'iframe':
-        return (
+        return isSafeIframeSrc(project.previewUrl) ? (
           <div className="relative aspect-video rounded-t-xl bg-bg-tertiary border-b border-border-accent overflow-hidden group/browser">
             {/* Browser chrome */}
             <div className="absolute top-0 inset-x-0 h-8 bg-bg-secondary border-b border-border-accent flex items-center px-4 space-x-1.5 z-20">
@@ -39,12 +58,33 @@ export function ProjectCard({ project }: { project: Project }) {
               <div className="w-2.5 h-2.5 rounded-full bg-[#2E5E3E] border border-[var(--border-accent)]/20" />
               <div className="flex-grow flex justify-center">
                 <div className="w-1/2 h-5 bg-bg-tertiary border border-border-accent/40 rounded-md px-3 flex items-center">
-                  <span className="text-[8px] font-mono text-text-tertiary truncate">{project.liveUrl || 'https://vibedude.sh'}</span>
+                  <span className="text-[8px] font-mono text-text-tertiary truncate">{project.liveUrl || project.previewUrl}</span>
                 </div>
               </div>
             </div>
-            <iframe src={project.previewUrl} className="w-full h-full pt-8 pointer-events-none opacity-50 grayscale group-hover/browser:grayscale-0 group-hover/browser:opacity-100 transition-all duration-700" title={project.name} />
+            <iframe
+              src={project.previewUrl}
+              className="w-full h-full pt-8 pointer-events-none opacity-50 grayscale group-hover/browser:grayscale-0 group-hover/browser:opacity-100 transition-all duration-700"
+              title={project.name}
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin"
+            />
             <div className="absolute inset-x-0 bottom-0 top-8 bg-gradient-to-t from-bg-primary to-transparent pointer-events-none z-10 opacity-60 group-hover/browser:opacity-0 transition-opacity" />
+          </div>
+        ) : (
+          // Fallback when iframe src is own domain or unsafe
+          <div className="preview-unavailable">
+            <span className="section-label">// live preview</span>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="preview-link"
+              >
+                open site →
+              </a>
+            )}
           </div>
         );
       case 'video':
@@ -211,7 +251,13 @@ export function ProjectCard({ project }: { project: Project }) {
               >
                 <X className="h-6 w-6" />
               </button>
-              <iframe src={project.previewUrl || ''} className="w-full h-full" allowFullScreen />
+              <iframe
+                src={project.previewUrl || ''}
+                className="w-full h-full"
+                allowFullScreen
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin allow-presentation"
+              />
             </motion.div>
           </motion.div>
         )}
